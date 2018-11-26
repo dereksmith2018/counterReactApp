@@ -27,6 +27,13 @@ class App extends Component {
     });
     this.setState({ counters: counters });
   };
+  handleMinus = counter => {
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index] = { ...counter };
+    counters[index].value--;
+    this.setState({ counters });
+  };
 
   handleDelete = counterId => {
     const counters = this.state.counters.filter(
@@ -41,6 +48,7 @@ class App extends Component {
           totalCounters={
             this.state.counters.filter(count => count.value > 0).length
           }
+          totalClicked={this.state.handleIncrement}
         />
         <main className="container">
           <Counters
@@ -48,6 +56,7 @@ class App extends Component {
             onReset={this.handleReset}
             onIncrement={this.handleIncrement}
             onDelete={this.handleDelete}
+            onMinus={this.handleMinus}
           />
         </main>
       </React.Fragment>
